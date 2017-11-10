@@ -62,19 +62,29 @@ func main() {
 		os.Exit(0)
 	}
 
-	// display Unicode code point value for glyphs entered as command line arguments
-	for i := 1; i < len(os.Args); i++ {
-		if len(os.Args[i]) > 1 { // handle single argument that includes multiple glyphs
-			charList := strings.Split(os.Args[i], "")
+	stdOutput := unicodeSearch(os.Args[1:])
+	for _, line := range stdOutput {
+		fmt.Print(line)
+	}
+}
+
+// writes Unicode code point value(s) to standard output stream for glyphs entered as command line arguments
+func unicodeSearch(argv []string) []string {
+	var solist []string
+	for i := 0; i < len(argv); i++ {
+		if len(argv[i]) > 1 { // handle single argument that includes multiple glyphs
+			charList := strings.Split(argv[i], "")
 			for x := 0; x < len(charList); x++ {
 				r, _ := utf8.DecodeRuneInString(charList[x])
-				fmt.Printf("%#U\n", r)
+				//fmt.Printf("%#U\n", r)
+				solist = append(solist, fmt.Sprintf("%#U\n", r))
 			}
 		} else { // handle multiple individual arguments
-			r, _ := utf8.DecodeRuneInString(os.Args[i])
-			fmt.Printf("%#U\n", r)
+			r, _ := utf8.DecodeRuneInString(argv[i])
+			//fmt.Printf("%#U\n", r)
+			solist = append(solist, fmt.Sprintf("%#U\n", r))
 		}
 
 	}
-
+	return solist
 }
