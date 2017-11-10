@@ -10,10 +10,10 @@ import (
 )
 
 const (
-	VERSION = "0.9.0"
-	USAGE   = "Usage: uni [glyph 1]...[glyph n]\n"
-	HELP    = "=================================================\n" +
-		" uni v" + VERSION + "\n" +
+	version = "0.9.0"
+	usage   = "Usage: uni [glyph 1]...[glyph n]\n"
+	help    = "=================================================\n" +
+		" uni v" + version + "\n" +
 		" Copyright 2017 Christopher Simpkins\n" +
 		" MIT License\n\n" +
 		" Source: https://github.com/source-foundry/uni\n" +
@@ -31,7 +31,7 @@ func main() {
 	// test for at least one argument on command line
 	if len(os.Args) < 2 {
 		os.Stderr.WriteString("[Error] Please include at least one argument for your Unicode code point search\n")
-		os.Stderr.WriteString(USAGE)
+		os.Stderr.WriteString(usage)
 		os.Exit(1)
 	}
 
@@ -46,19 +46,19 @@ func main() {
 	// parse command line flags and handle them
 	switch {
 	case *versionShort:
-		os.Stdout.WriteString("uni v" + VERSION + "\n")
+		os.Stdout.WriteString("uni v" + version + "\n")
 		os.Exit(0)
 	case *versionLong:
-		os.Stdout.WriteString("uni v" + VERSION + "\n")
+		os.Stdout.WriteString("uni v" + version + "\n")
 		os.Exit(0)
 	case *helpShort:
-		os.Stdout.WriteString(HELP)
+		os.Stdout.WriteString(help)
 		os.Exit(0)
 	case *helpLong:
-		os.Stdout.WriteString(HELP)
+		os.Stdout.WriteString(help)
 		os.Exit(0)
 	case *usageLong:
-		os.Stdout.WriteString(USAGE)
+		os.Stdout.WriteString(usage)
 		os.Exit(0)
 	}
 
