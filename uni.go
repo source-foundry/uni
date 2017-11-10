@@ -76,12 +76,10 @@ func unicodeSearch(argv []string) []string {
 			charList := strings.Split(argv[i], "")
 			for x := 0; x < len(charList); x++ {
 				r, _ := utf8.DecodeRuneInString(charList[x])
-				//fmt.Printf("%#U\n", r)
 				solist = append(solist, fmt.Sprintf("%#U\n", r))
 			}
 		} else { // handle multiple individual arguments
 			r, _ := utf8.DecodeRuneInString(argv[i])
-			//fmt.Printf("%#U\n", r)
 			solist = append(solist, fmt.Sprintf("%#U\n", r))
 		}
 
