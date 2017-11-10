@@ -1,3 +1,4 @@
+// uni is a command line executable that displays Unicode code points for glyph arguments
 package main
 
 import (
@@ -22,7 +23,7 @@ const (
 		" Options:\n" +
 		" -h, --help           Application help\n" +
 		"     --usage          Application usage\n" +
-		" -v, --version        Application version\n"
+		" -v, --version        Application version\n\n"
 )
 
 func main() {
