@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// tests single argument requests to unicodeSearch function
 func TestUnicodeCodePointsSingle(t *testing.T) {
 	cases := []struct {
 		glyph    string
@@ -30,6 +31,7 @@ func TestUnicodeCodePointsSingle(t *testing.T) {
 	}
 }
 
+// tests multiple argument requests to the unicodeSearch function
 func TestUnicodeCodePointsMultiple(t *testing.T) {
 	cases := []struct {
 		glyph    string
