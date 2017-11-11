@@ -6,6 +6,9 @@
 
 uni is an application that displays Unicode code points for glyphs included as arguments on the command line.
 
+
+[![uni Example](https://raw.githubusercontent.com/source-foundry/uni/img/img/carbon-crunch.png)](#)
+
 ## Install
 
 uni is developed in Go and compiled to the command line executable `uni`.  A variety of cross-compiled binaries are available for use on Linux, macOS, and Windows systems, or you can download the source and compile the application yourself.  Instructions for both approaches follow.
