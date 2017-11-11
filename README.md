@@ -12,7 +12,7 @@ uni is developed in Go and compiled to the command line executable `uni`.  A var
 
 ### Install a pre-compiled binary
 
-Download the appropriate archive file for your system from the repository releases.  Unpack the `.zip` archive and move the `uni` executable to the desired directory.  For *.nix users (including macOS), the `uni` executable can be placed on your system PATH (e.g. `/usr/local/bin`) to enable use system-wide use with the following:
+[Download the appropriate archive file for your system from the repository releases](https://github.com/source-foundry/uni/releases/latest).  Unpack the `.zip` archive and move the `uni` executable to the desired directory.  For *.nix users (including macOS), the `uni` executable can be placed on your system PATH (e.g. `/usr/local/bin`) to enable use system-wide use with the following:
 
 ```
 $ uni [args]
