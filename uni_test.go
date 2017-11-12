@@ -1,12 +1,34 @@
 package main
 
 import (
-	//"fmt"
+	"regexp"
 	"strings"
 	"testing"
 )
 
-// tests single argument requests to unicodeSearch function
+// test version string formatting
+func TestVersionString(t *testing.T) {
+	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
+	if r.MatchString(version) == false {
+		t.Errorf("[FAIL] Failed to match regex pattern to version string")
+	}
+}
+
+// test usage string formatting
+func TestUsageString(t *testing.T) {
+	if strings.HasPrefix(usage, "Usage:") == false {
+		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
+	}
+}
+
+// test help string formatting
+func TestHelpString(t *testing.T) {
+	if strings.HasPrefix(help, "====") == false {
+		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
+	}
+}
+
+// test single argument requests to unicodeSearch function
 func TestUnicodeCodePointsSingle(t *testing.T) {
 	cases := []struct {
 		glyph    string
@@ -31,7 +53,7 @@ func TestUnicodeCodePointsSingle(t *testing.T) {
 	}
 }
 
-// tests multiple argument requests to the unicodeSearch function
+// test multiple argument requests to the unicodeSearch function
 func TestUnicodeCodePointsMultiple(t *testing.T) {
 	cases := []struct {
 		glyph    string
