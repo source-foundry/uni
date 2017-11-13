@@ -12,28 +12,6 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-//// test version string formatting
-//func TestVersionString(t *testing.T) {
-//	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
-//	if r.MatchString(version) == false {
-//		t.Errorf("[FAIL] Failed to match regex pattern to version string")
-//	}
-//}
-
-//// test usage string formatting
-//func TestUsageString(t *testing.T) {
-//	if strings.HasPrefix(usage, "Usage:") == false {
-//		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
-//	}
-//}
-
-//// test help string formatting
-//func TestHelpString(t *testing.T) {
-//	if strings.HasPrefix(help, "====") == false {
-//		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
-//	}
-//}
-
 // test single argument requests to unicodeSearch function
 func TestUnicodeCodePointsSingle(t *testing.T) {
 	cases := []struct {
@@ -122,7 +100,6 @@ func TestMainFunction(t *testing.T) {
 
 }
 
-
 func TestVersionString(t *testing.T) {
 	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
 
@@ -132,7 +109,7 @@ func TestVersionString(t *testing.T) {
 			v := version
 
 			Convey("Is the version string properly formatted", func() {
-				So(true, ShouldEqual, r.MatchString(v))
+				So(r.MatchString(v), ShouldEqual, true)
 			})
 		})
 	})
@@ -145,7 +122,7 @@ func TestUsageString(t *testing.T) {
 			u := usage
 
 			Convey("Does the usage string have an appropriate start substring?", func() {
-				So(strings.HasPrefix(u, "Usage:"), ShouldEqual, true)
+				So(u, ShouldStartWith, "Usage:")
 			})
 		})
 	})
@@ -158,8 +135,31 @@ func TestHelpString(t *testing.T) {
 			h := help
 
 			Convey("Does the usage string have an appropriate start substring?", func() {
-				So(strings.HasPrefix(h, "======="), ShouldEqual, true)
+				So(h, ShouldStartWith, "=======")
 			})
 		})
 	})
 }
+
+
+//// test version string formatting
+//func TestVersionString(t *testing.T) {
+//	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
+//	if r.MatchString(version) == false {
+//		t.Errorf("[FAIL] Failed to match regex pattern to version string")
+//	}
+//}
+
+//// test usage string formatting
+//func TestUsageString(t *testing.T) {
+//	if strings.HasPrefix(usage, "Usage:") == false {
+//		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
+//	}
+//}
+
+//// test help string formatting
+//func TestHelpString(t *testing.T) {
+//	if strings.HasPrefix(help, "====") == false {
+//		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
+//	}
+//}
