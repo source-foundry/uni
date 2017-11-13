@@ -2,13 +2,13 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"unicode/utf8"
-	"bytes"
-	"io"
 )
 
 const (
@@ -59,12 +59,12 @@ func main() {
 	if len(os.Args) < 2 {
 		stdin := os.Stdin
 		f, err := stdin.Stat()
-		if err != nil {
+		if err != nil { // unable to obtain file data with Stat() method call = fail
 			handleStdInErrors()
 		}
 
 		size := f.Size()
-		if size == 0 {
+		if size == 0 { // there does not appear to be any data in the stdin stream = fail
 			handleStdInErrors()
 		}
 
@@ -74,7 +74,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		stdinList := strings.Split(tmp.String(), "")
+		stdinList := strings.Split(tmp.String(), "") // split the stdin string by glyph to a slice
 		stdOutput := unicodeSearch(stdinList)
 		for _, line := range stdOutput {
 			fmt.Print(line)
@@ -89,7 +89,6 @@ func main() {
 		}
 
 	}
-
 
 }
 
