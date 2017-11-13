@@ -33,8 +33,8 @@ If you would prefer to build the application from the source, follow these instr
 
 - Install [Go](https://golang.org/doc/install)
 - [Define your GOPATH](https://github.com/golang/go/wiki/Setting-GOPATH)
+- Add `$GOPATH/bin` to your system `$PATH` (e.g. `export PATH=$GOPATH/bin:$PATH`)
 - `go get github.com/source-foundry/uni`
-- `go install $GOPATH/src/github.com/source-foundry/uni`
 
 ## Usage
 
