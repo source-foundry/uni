@@ -7,11 +7,13 @@ import (
 	"os"
 	"strings"
 	"unicode/utf8"
+	"bytes"
+	"io"
 )
 
 const (
-	version = "0.9.0"
-	usage   = "Usage: uni [glyph 1]...[glyph n]\n"
+	version = "0.10.0"
+	usage   = "Usage: uni [glyph 1]...[glyph n]\nLine Filter Usage: [application] | uni\n"
 	help    = "=================================================\n" +
 		" uni v" + version + "\n" +
 		" Copyright 2017 Christopher Simpkins\n" +
@@ -19,7 +21,10 @@ const (
 		" Source: https://github.com/source-foundry/uni\n" +
 		"=================================================\n\n" +
 		" Usage:\n" +
-		"  $ uni [glyph 1]...[glyph n]\n\n" +
+		"  - With command line arguments:\n" +
+		"        $ uni [glyph 1]...[glyph n]\n" +
+		"  - As line filter:\n" +
+		"        $ [application] | uni\n\n" +
 		" Options:\n" +
 		" -h, --help           Application help\n" +
 		"     --usage          Application usage\n" +
@@ -27,13 +32,6 @@ const (
 )
 
 func main() {
-
-	// test for at least one argument on command line
-	if len(os.Args) < 2 {
-		os.Stderr.WriteString("[Error] Please include at least one argument for your Unicode code point search\n")
-		os.Stderr.WriteString(usage)
-		os.Exit(1)
-	}
 
 	// define available command line flags
 	var versionShort = flag.Bool("v", false, "Application version")
@@ -56,10 +54,43 @@ func main() {
 		os.Exit(0)
 	}
 
-	stdOutput := unicodeSearch(os.Args[1:])
-	for _, line := range stdOutput {
-		fmt.Print(line)
+	// if there are no arguments to the executable, check std input stream to see if
+	// this is a line filter request that is piped to executable
+	if len(os.Args) < 2 {
+		stdin := os.Stdin
+		f, err := stdin.Stat()
+		if err != nil {
+			handleStdInErrors()
+		}
+
+		size := f.Size()
+		if size == 0 {
+			handleStdInErrors()
+		}
+
+		tmp := new(bytes.Buffer)
+		if _, err := io.Copy(tmp, stdin); err != nil {
+			os.Stderr.WriteString("[Error] Failed to copy std input stream to memory. " + fmt.Sprintf("%v", err))
+			os.Exit(1)
+		}
+
+		stdinList := strings.Split(tmp.String(), "")
+		stdOutput := unicodeSearch(stdinList)
+		for _, line := range stdOutput {
+			fmt.Print(line)
+		}
+
+	} else {
+
+		// handle command line arguments to the executable
+		stdOutput := unicodeSearch(os.Args[1:])
+		for _, line := range stdOutput {
+			fmt.Print(line)
+		}
+
 	}
+
+
 }
 
 // writes Unicode code point value(s) to standard output stream for glyphs entered as command line arguments
@@ -79,4 +110,10 @@ func unicodeSearch(argv []string) []string {
 
 	}
 	return solist
+}
+
+func handleStdInErrors() {
+	os.Stderr.WriteString("[Error] Please include at least one argument or pipe a string to the executable through the stdin stream.\n")
+	os.Stderr.WriteString(usage)
+	os.Exit(1)
 }
