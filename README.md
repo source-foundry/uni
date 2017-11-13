@@ -36,6 +36,14 @@ If you would prefer to build the application from the source, follow these instr
 - Add `$GOPATH/bin` to your system `$PATH` (e.g. `export PATH=$GOPATH/bin:$PATH`)
 - `go get github.com/source-foundry/uni`
 
+## Uninstall
+
+The installation includes a single executable binary file.  If you installed with `go get` or added one of the pre-compiled binaries on your system `$PATH` on *.nix systems, you can uninstall with:
+
+```
+$ rm $(which uni)
+```
+
 ## Usage
 
 uni takes glyph arguments and displays the associated Unicode code points.  You can include the glyphs in a single string or separate them with spaces.  Use quotes around special shell characters.
