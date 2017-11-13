@@ -141,7 +141,6 @@ func TestHelpString(t *testing.T) {
 	})
 }
 
-
 //// test version string formatting
 //func TestVersionString(t *testing.T) {
 //	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
