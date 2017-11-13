@@ -1,36 +1,38 @@
 package main
 
 import (
+	"bytes"
+	"io"
+	"log"
+	"os"
 	"regexp"
 	"strings"
 	"testing"
-	"os"
-	"log"
-	"bytes"
-	"io"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
-// test version string formatting
-func TestVersionString(t *testing.T) {
-	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
-	if r.MatchString(version) == false {
-		t.Errorf("[FAIL] Failed to match regex pattern to version string")
-	}
-}
+//// test version string formatting
+//func TestVersionString(t *testing.T) {
+//	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
+//	if r.MatchString(version) == false {
+//		t.Errorf("[FAIL] Failed to match regex pattern to version string")
+//	}
+//}
 
-// test usage string formatting
-func TestUsageString(t *testing.T) {
-	if strings.HasPrefix(usage, "Usage:") == false {
-		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
-	}
-}
+//// test usage string formatting
+//func TestUsageString(t *testing.T) {
+//	if strings.HasPrefix(usage, "Usage:") == false {
+//		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
+//	}
+//}
 
-// test help string formatting
-func TestHelpString(t *testing.T) {
-	if strings.HasPrefix(help, "====") == false {
-		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
-	}
-}
+//// test help string formatting
+//func TestHelpString(t *testing.T) {
+//	if strings.HasPrefix(help, "====") == false {
+//		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
+//	}
+//}
 
 // test single argument requests to unicodeSearch function
 func TestUnicodeCodePointsSingle(t *testing.T) {
@@ -105,7 +107,7 @@ func TestMainFunction(t *testing.T) {
 		outC <- buf.String()
 	}()
 
-	main()  // call main function with mock os.Args defined above
+	main() // call main function with mock os.Args defined above
 
 	// back to normal state
 	w.Close()
@@ -118,4 +120,46 @@ func TestMainFunction(t *testing.T) {
 		t.Errorf("[FAIL] Expected execution of 'uni f' to return string that begins with 'U+006A', but instead it returned %s", out)
 	}
 
+}
+
+
+func TestVersionString(t *testing.T) {
+	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
+
+	Convey("Version string formatting", t, func() {
+
+		Convey("Given the version string constant", func() {
+			v := version
+
+			Convey("Is the version string properly formatted", func() {
+				So(true, ShouldEqual, r.MatchString(v))
+			})
+		})
+	})
+}
+
+func TestUsageString(t *testing.T) {
+	Convey("Usage string formatting", t, func() {
+
+		Convey("Given the usage string constant", func() {
+			u := usage
+
+			Convey("Does the usage string have an appropriate start substring?", func() {
+				So(strings.HasPrefix(u, "Usage:"), ShouldEqual, true)
+			})
+		})
+	})
+}
+
+func TestHelpString(t *testing.T) {
+	Convey("Help string formatting", t, func() {
+
+		Convey("Given the help string constant", func() {
+			h := help
+
+			Convey("Does the usage string have an appropriate start substring?", func() {
+				So(strings.HasPrefix(h, "======="), ShouldEqual, true)
+			})
+		})
+	})
 }
