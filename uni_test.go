@@ -140,25 +140,3 @@ func TestHelpString(t *testing.T) {
 		})
 	})
 }
-
-//// test version string formatting
-//func TestVersionString(t *testing.T) {
-//	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
-//	if r.MatchString(version) == false {
-//		t.Errorf("[FAIL] Failed to match regex pattern to version string")
-//	}
-//}
-
-//// test usage string formatting
-//func TestUsageString(t *testing.T) {
-//	if strings.HasPrefix(usage, "Usage:") == false {
-//		t.Errorf("[FAIL] Improperly formatted usage string.  Expected string to start with 'Usage:' and received %s", usage)
-//	}
-//}
-
-//// test help string formatting
-//func TestHelpString(t *testing.T) {
-//	if strings.HasPrefix(help, "====") == false {
-//		t.Errorf("[FAIL] Improperly formatted usage string. Expected to start with '===' and received %s", help)
-//	}
-//}
