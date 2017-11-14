@@ -31,14 +31,19 @@ const (
 		" -v, --version        Application version\n\n"
 )
 
+var versionShort, versionLong, helpShort, helpLong, usageLong *bool
+
+func init() {
+	// define available command line flags
+	versionShort = flag.Bool("v", false, "Application version")
+	versionLong = flag.Bool("version", false, "Application version")
+	helpShort = flag.Bool("h", false, "Help")
+	helpLong = flag.Bool("help", false, "Help")
+	usageLong = flag.Bool("usage", false, "Usage")
+}
+
 func main() {
 
-	// define available command line flags
-	var versionShort = flag.Bool("v", false, "Application version")
-	var versionLong = flag.Bool("version", false, "Application version")
-	var helpShort = flag.Bool("h", false, "Help")
-	var helpLong = flag.Bool("help", false, "Help")
-	var usageLong = flag.Bool("usage", false, "Usage")
 	flag.Parse()
 
 	// parse command line flags and handle them
