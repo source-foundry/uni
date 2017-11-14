@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
@@ -10,7 +11,6 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"io/ioutil"
 )
 
 // test single argument requests to unicodeSearch function

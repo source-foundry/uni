@@ -130,5 +130,3 @@ func unicodeSearch(argv []string) []string {
 	}
 	return solist
 }
-
-
