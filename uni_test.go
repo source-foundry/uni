@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
+	"io/ioutil"
 )
 
 // test single argument requests to unicodeSearch function
@@ -98,6 +99,46 @@ func TestMainFunction(t *testing.T) {
 		t.Errorf("[FAIL] Expected execution of 'uni f' to return string that begins with 'U+006A', but instead it returned %s", out)
 	}
 
+}
+
+func TestStdinValidatesTrueFunction(t *testing.T) {
+
+	Convey("Test StdinValidates Function", t, func() {
+
+		Convey("Given mocked os.Stdin that should validate true", func() {
+			// Create temporary file
+			file, _ := ioutil.TempFile(os.TempDir(), "stdin")
+			defer os.Remove(file.Name())
+
+			// Write to it
+			file.WriteString("stdin test")
+
+			Convey("Does mock stdin validate true?", func() {
+				So(stdinValidates(file), ShouldEqual, true)
+			})
+		})
+
+	})
+}
+
+func TestStdinValidatesFalseFunction(t *testing.T) {
+
+	Convey("Test StdinValidates Function", t, func() {
+
+		Convey("Given mocked os.Stdin that should validate false", func() {
+			// Create temporary file
+			file, _ := ioutil.TempFile(os.TempDir(), "stdin")
+			defer os.Remove(file.Name())
+
+			// Write to it
+			file.WriteString("")
+
+			Convey("Does mock stdin validate false?", func() {
+				So(stdinValidates(file), ShouldEqual, false)
+			})
+		})
+
+	})
 }
 
 func TestVersionString(t *testing.T) {
