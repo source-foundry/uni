@@ -6,8 +6,9 @@
 
 `uni` is an application that displays Unicode code points for glyphs that are either included as arguments on the command line or piped through the standard input stream to the `uni` executable.
 
+<img src="https://raw.githubusercontent.com/source-foundry/uni/img/img/uni-crunch.png" alt="uni Argument Example" width="99%/>
 
-[![uni Example](https://raw.githubusercontent.com/source-foundry/uni/img/img/carbon-crunch.png)](#)
+<img src="https://raw.githubusercontent.com/source-foundry/uni/img/img/uni2-crunch.png" alt="uni Line Filter Example" width="99%"/>
 
 ## Install
 
