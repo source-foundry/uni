@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	version = "0.10.0"
+	version = "0.10.1"
 	usage   = "Usage: uni [glyph 1]...[glyph n]\nLine Filter Usage: [application command] | uni\n"
 	help    = "=================================================\n" +
 		" uni v" + version + "\n" +
