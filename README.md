@@ -87,6 +87,8 @@ U+30CA 'ナ'
 
 You can also pipe text data to `uni` through the standard input stream. `uni` will process every glyph that it receives in the stdin stream and print the associated Unicode code point to standard output.
 
+#### Example
+
 ```
 $ echo -n "Aa1Ø€βф▀र༩↵√ナ" | uni
 U+0041 'A'
