@@ -9,8 +9,6 @@ import (
 	"regexp"
 	"strings"
 	"testing"
-
-	. "github.com/smartystreets/goconvey/convey"
 )
 
 // test single argument requests to unicodeSearch function
@@ -102,82 +100,47 @@ func TestMainFunction(t *testing.T) {
 }
 
 func TestStdinValidatesTrueFunction(t *testing.T) {
+	file, _ := ioutil.TempFile(os.TempDir(), "stdin")
+	defer os.Remove(file.Name())
 
-	Convey("Test StdinValidates Function", t, func() {
+	file.WriteString("stdin test")
 
-		Convey("Given mocked os.Stdin that should validate true", func() {
-			// Create temporary file
-			file, _ := ioutil.TempFile(os.TempDir(), "stdin")
-			defer os.Remove(file.Name())
+	result := stdinValidates(file)
+	if result != true {
+		t.Errorf("[FAIL] Attempt to validate mocked stdin failed.")
+	}
 
-			// Write to it
-			file.WriteString("stdin test")
-
-			Convey("Does mock stdin validate true?", func() {
-				So(stdinValidates(file), ShouldEqual, true)
-			})
-		})
-
-	})
 }
 
 func TestStdinValidatesFalseFunction(t *testing.T) {
+	file, _ := ioutil.TempFile(os.TempDir(), "stdin")
+	defer os.Remove(file.Name())
 
-	Convey("Test StdinValidates Function", t, func() {
+	file.WriteString("")
 
-		Convey("Given mocked os.Stdin that should validate false", func() {
-			// Create temporary file
-			file, _ := ioutil.TempFile(os.TempDir(), "stdin")
-			defer os.Remove(file.Name())
+	result := stdinValidates(file)
+	if result != false {
+		t.Errorf("[FAIL] Attempt to validate empty mocked stdin failed.")
+	}
 
-			// Write to it
-			file.WriteString("")
-
-			Convey("Does mock stdin validate false?", func() {
-				So(stdinValidates(file), ShouldEqual, false)
-			})
-		})
-
-	})
 }
 
 func TestVersionString(t *testing.T) {
 	r, _ := regexp.Compile(`\d{1,2}.\d{1,2}.\d{1,2}`)
-
-	Convey("Version string formatting", t, func() {
-
-		Convey("Given the version string constant", func() {
-			v := version
-
-			Convey("Is the version string properly formatted", func() {
-				So(r.MatchString(v), ShouldEqual, true)
-			})
-		})
-	})
+	// match expected format of version string
+	if r.MatchString(version) != true {
+		t.Errorf("[FAIL] Unexpected version string format identified.")
+	}
 }
 
 func TestUsageString(t *testing.T) {
-	Convey("Usage string formatting", t, func() {
-
-		Convey("Given the usage string constant", func() {
-			u := usage
-
-			Convey("Does the usage string have an appropriate start substring?", func() {
-				So(u, ShouldStartWith, "Usage:")
-			})
-		})
-	})
+	if strings.HasPrefix(usage, "Usage:") == false {
+		t.Errorf("[FAIL] Unexpected usage string format.")
+	}
 }
 
 func TestHelpString(t *testing.T) {
-	Convey("Help string formatting", t, func() {
-
-		Convey("Given the help string constant", func() {
-			h := help
-
-			Convey("Does the usage string have an appropriate start substring?", func() {
-				So(h, ShouldStartWith, "=======")
-			})
-		})
-	})
+	if strings.HasPrefix(help, "=====") == false {
+		t.Errorf("[FAIL] Unexpected help string format.")
+	}
 }
