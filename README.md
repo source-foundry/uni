@@ -1,6 +1,6 @@
 # uni
 
-[![Build Status](https://semaphoreci.com/api/v1/sourcefoundry/uni/branches/master/badge.svg)](https://semaphoreci.com/sourcefoundry/uni) [![Go Report Card](https://goreportcard.com/badge/github.com/source-foundry/uni)](https://goreportcard.com/report/github.com/source-foundry/uni)
+[![Build Status](https://semaphoreci.com/api/v1/sourcefoundry/uni/branches/master/badge.svg)](https://semaphoreci.com/sourcefoundry/uni) [![Build status](https://ci.appveyor.com/api/projects/status/1cbesa0qnbqgoj0p/branch/master?svg=true)](https://ci.appveyor.com/project/chrissimpkins/uni/branch/master) [![Go Report Card](https://goreportcard.com/badge/github.com/source-foundry/uni)](https://goreportcard.com/report/github.com/source-foundry/uni)
 
 ## About
 
