@@ -4,37 +4,46 @@
 
 ## About
 
-uni is an application that displays Unicode code points for glyphs included as arguments on the command line.
+`uni` is an application that displays Unicode code points for glyphs that are either included as arguments on the command line or piped through the standard input stream to the `uni` executable.
 
 
 [![uni Example](https://raw.githubusercontent.com/source-foundry/uni/img/img/carbon-crunch.png)](#)
 
 ## Install
 
-uni is developed in Go and compiled to the command line executable `uni`.  A variety of cross-compiled binaries are available for use on Linux, macOS, and Windows systems, or you can download the source and compile the application yourself.  Instructions for both approaches follow.
+uni is developed in Go and compiled to the command line executable `uni` (`uni.exe` on Windows).  A variety of cross-compiled binaries are available for use on Linux, macOS, and Windows systems, or you can download the source and compile the application yourself.  Instructions for both approaches follow.
 
-### Install a pre-compiled binary
+## Installation
 
-[Download the appropriate archive file for your system from the repository releases](https://github.com/source-foundry/uni/releases/latest).  Unpack the `.zip` archive and move the `uni` executable to the desired directory.  For *.nix users (including macOS), the `uni` executable can be placed on your system PATH (e.g. `/usr/local/bin`) to enable use system-wide use with the following:
+### Approach 1: Install the pre-compiled binary executable file
+
+Download the latest compiled release file for your operating system and architecture from [the Releases page](https://github.com/source-foundry/uni/releases/latest).
+
+#### Linux / macOS
+
+Unpack the tar.gz archive and move the `uni` executable file to a directory on your system PATH (e.g. `/usr/local/bin`).  This can be performed by executing the following command in the root of the unpacked archive:
 
 ```
-$ uni [args]
+$ mv uni /usr/local/bin/uni
 ```
 
-If you do not install on your system PATH, navigate to the directory where you saved the `uni` executable and use the following:
+There are no dependencies contained in the archive.  You can delete all downloaded archive files after the above step.
+
+#### Windows
+
+Unpack the zip archive and move the `uni.exe` executable file to a directory on your system PATH. See [details here](https://stackoverflow.com/questions/4822400/register-an-exe-so-you-can-run-it-from-any-command-line-in-windows) for more information about how to do this.
+
+There are no dependencies contained in the archive.  You can delete all downloaded archive files after the above step.
+
+### Approach 2: Compile from the source code and install
+
+You must install the Go programming language (which includes the `go` tool) in order to compile the project from source.  Follow the [instructions on the Go download page](https://golang.org/dl/) for your platform. 
+
+Once you have installed Go and configured your settings so that Go executables are installed on your system PATH, use the following command to (1) pull the master branch of the ink repository; (2) compile the ink executable from source for your platform/architecture configuration; (3) install the executable on your system:
 
 ```
-$ ./uni [args]
+$ go get github.com/source-foundry/uni
 ```
-
-### Compile from source files and install
-
-If you would prefer to build the application from the source, follow these instructions:
-
-- Install [Go](https://golang.org/doc/install)
-- [Define your GOPATH](https://github.com/golang/go/wiki/Setting-GOPATH)
-- Add `$GOPATH/bin` to your system `$PATH` (e.g. `export PATH=$GOPATH/bin:$PATH`)
-- `go get github.com/source-foundry/uni`
 
 ## Uninstall
 
@@ -46,7 +55,9 @@ $ rm $(which uni)
 
 ## Usage
 
-uni takes glyph arguments and displays the associated Unicode code points.  You can include the glyphs in a single string or separate them with spaces.  Use quotes around special shell characters.
+### Glyphs as arguments to `uni`
+
+`uni` takes glyph arguments and displays the associated Unicode code points.  You can include the glyphs in a single string or separate them with spaces.  Use quotes around special shell characters.
 
 ```
 $ uni [glyph 1]...[glyph n]
@@ -56,6 +67,27 @@ $ uni [glyph 1]...[glyph n]
 
 ```
 $ uni Aa1Ø€βф▀र༩↵√ナ
+U+0041 'A'
+U+0061 'a'
+U+0031 '1'
+U+00D8 'Ø'
+U+20AC '€'
+U+03B2 'β'
+U+0444 'ф'
+U+2580 '▀'
+U+0930 'र'
+U+0F29 '༩'
+U+21B5 '↵'
+U+221A '√'
+U+30CA 'ナ'
+```
+
+### Glyphs piped through standard input stream
+
+You can also pipe text data to `uni` through the standard input stream. `uni` will process every glyph that it receives in the stdin stream and print the associated Unicode code point to standard output.
+
+```
+$ echo -n "Aa1Ø€βф▀र༩↵√ナ" | uni
 U+0041 'A'
 U+0061 'a'
 U+0031 '1'
