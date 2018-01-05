@@ -1,0 +1,62 @@
+project_name: uni
+release:
+  github:
+    owner: source-foundry
+    name: uni
+  name_template: '{{.Tag}}'
+  # If set to true, will not auto-publish the release.
+  # Default is false.
+  draft: true
+#brew:
+#  commit_author:
+#    name: goreleaserbot
+#    email: goreleaser@carlosbecker.com
+#  install: bin.install "ink"
+builds:
+- goos:
+  - linux
+  - darwin
+  - windows
+  goarch:
+  - amd64
+  - "386"
+  - arm
+  - arm64
+  ignore:
+    - goos: darwin
+      goarch: 386
+  main: .
+  ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+  binary: ink
+archive:
+  format: tar.gz
+  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm
+    }}v{{ .Arm }}{{ end }}'
+  files:
+  - LICENSE
+  - README.md
+  - CHANGELOG.md
+  replacements:
+    amd64: x86_64
+    386: i386
+    darwin: macOS
+    linux: Linux
+    windows: Windows
+  format_overrides:
+    - goos: windows
+      format: zip
+#fpm:
+#  bindir: /usr/local/bin
+snapshot:
+  name_template: SNAPSHOT-{{ .Commit }}
+checksum:
+  name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+dist: dist
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - docs
+      - Merge pull request
+      - Merge branch
+
