@@ -40,7 +40,7 @@ There are no dependencies contained in the archive.  You can delete all download
 
 You must install the Go programming language (which includes the `go` tool) in order to compile the project from source.  Follow the [instructions on the Go download page](https://golang.org/dl/) for your platform. 
 
-Once you have installed Go and configured your settings so that Go executables are installed on your system PATH, use the following command to (1) pull the master branch of the ink repository; (2) compile the ink executable from source for your platform/architecture configuration; (3) install the executable on your system:
+Once you have installed Go and configured your settings so that Go executables are installed on your system PATH, use the following command to (1) pull the master branch of the uni repository; (2) compile the `uni` executable from source for your platform/architecture configuration; (3) install the executable on your system:
 
 ```
 $ go get github.com/source-foundry/uni
