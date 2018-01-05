@@ -13,10 +13,10 @@ import (
 
 const (
 	version = "0.10.0"
-	usage   = "Usage: uni [glyph 1]...[glyph n]\nLine Filter Usage: [application] | uni\n"
+	usage   = "Usage: uni [glyph 1]...[glyph n]\nLine Filter Usage: [application command] | uni\n"
 	help    = "=================================================\n" +
 		" uni v" + version + "\n" +
-		" Copyright 2017 Christopher Simpkins\n" +
+		" Copyright 2018 Christopher Simpkins\n" +
 		" MIT License\n\n" +
 		" Source: https://github.com/source-foundry/uni\n" +
 		"=================================================\n\n" +
@@ -24,7 +24,7 @@ const (
 		"  - With command line arguments:\n" +
 		"        $ uni [glyph 1]...[glyph n]\n" +
 		"  - As line filter:\n" +
-		"        $ [application] | uni\n\n" +
+		"        $ [application command] | uni\n\n" +
 		" Options:\n" +
 		" -h, --help           Application help\n" +
 		"     --usage          Application usage\n" +
