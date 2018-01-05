@@ -1,0 +1,12 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+platform:
+- x86
+- x64
+clone_folder: C:\GOPATH\src\github.com\source-foundry\uni
+environment:
+  GOPATH: C:\GOPATH
+build_script:
+- cmd: go get -v -d -t github.com/source-foundry/uni/...
+test_script:
+- cmd: go test -v ./...
