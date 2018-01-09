@@ -17,11 +17,11 @@ func TestUnicodeCodePointsSingle(t *testing.T) {
 		glyph    string
 		expected string
 	}{
-		{"j", "U+006A 'j'\n"}, // ASCII
-		{"€", "U+20AC '€'\n"}, // Currency
-		{"β", "U+03B2 'β'\n"}, // Greek and Coptic
-		{"ф", "U+0444 'ф'\n"}, // Cyrillic
-		{"▀", "U+2580 '▀'\n"}, // Block elements
+		{"j", "U+006A 'j'"}, // ASCII
+		{"€", "U+20AC '€'"}, // Currency
+		{"β", "U+03B2 'β'"}, // Greek and Coptic
+		{"ф", "U+0444 'ф'"}, // Cyrillic
+		{"▀", "U+2580 '▀'"}, // Block elements
 	}
 
 	for _, c := range cases {
@@ -42,11 +42,11 @@ func TestUnicodeCodePointsMultiple(t *testing.T) {
 		glyph    string
 		expected string
 	}{
-		{"j", "U+006A 'j'\n"}, // ASCII
-		{"€", "U+20AC '€'\n"}, // Currency
-		{"β", "U+03B2 'β'\n"}, // Greek and Coptic
-		{"ф", "U+0444 'ф'\n"}, // Cyrillic
-		{"▀", "U+2580 '▀'\n"}, // Block elements
+		{"j", "U+006A 'j'"}, // ASCII
+		{"€", "U+20AC '€'"}, // Currency
+		{"β", "U+03B2 'β'"}, // Greek and Coptic
+		{"ф", "U+0444 'ф'"}, // Cyrillic
+		{"▀", "U+2580 '▀'"}, // Block elements
 	}
 
 	var testglyphs []string
