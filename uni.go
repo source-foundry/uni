@@ -88,22 +88,20 @@ func main() {
 		if isGlyphSearch {
 			stdinList := strings.Split(tmp.String(), ` `)
 			for _, arg := range stdinList {
-				i, err := strconv.ParseInt(arg, 16, 32)
+				stdoutString, err := glyphSearch(arg)
 				if err != nil {
-					os.Stderr.WriteString("[Error] Unable to parse the Unicode code point value '" + arg + "'\n")
+					errmsg := fmt.Sprintf("%v", err)
+					os.Stderr.WriteString("[Error] Unable to parse the Unicode code point request '" + arg + "' to a glyph. " + errmsg + "\n")
 					os.Exit(1)
 				}
-				// TODO: add check for printable glyph range integer value
-				r := rune(i)
-				stdoutString := "U+" + arg + " '" + string(r) + "'"
 				fmt.Println(stdoutString)
 			}
 
 		} else { // stdin stream search for Unicode code point from glyph search request
 			stdinList := strings.Split(tmp.String(), "") // split the stdin string by glyph to a slice
-			stdOutput := unicodeSearch(stdinList)
-			for _, line := range stdOutput {
-				fmt.Println(line)
+			stdOutputList := unicodeSearch(stdinList)
+			for _, stdoutString := range stdOutputList {
+				fmt.Println(stdoutString)
 			}
 		}
 
@@ -111,20 +109,18 @@ func main() {
 		// argument search for glyph from Unicode code point search request
 		if isGlyphSearch {
 			for _, arg := range os.Args[2:] {
-				i, err := strconv.ParseInt(arg, 16, 32)
+				stdoutString, err := glyphSearch(arg)
 				if err != nil {
-					os.Stderr.WriteString("[Error] Unable to parse the Unicode code point value '" + arg + "'\n")
+					errmsg := fmt.Sprintf("%v", err)
+					os.Stderr.WriteString("[Error] Unable to parse the Unicode code point request '" + arg + "' to a glyph. " + errmsg + "\n")
 					os.Exit(1)
 				}
-				// TODO: add check for printable glyph range integer value
-				r := rune(i)
-				stdoutString := "U+" + arg + " '" + string(r) + "'"
 				fmt.Println(stdoutString)
 			}
-		} else {  // argument search for Unicode code point from glyph search request
-			stdOutput := unicodeSearch(os.Args[1:])
-			for _, line := range stdOutput {
-				fmt.Println(line)
+		} else { // argument search for Unicode code point from glyph search request
+			stdOutputList := unicodeSearch(os.Args[1:])
+			for _, stdoutString := range stdOutputList {
+				fmt.Println(stdoutString)
 			}
 		}
 
@@ -148,12 +144,45 @@ func stdinValidates(stdin *os.File) bool {
 }
 
 func handleStdInErrors() {
-	os.Stderr.WriteString("[Error] Please include at least one argument or pipe a string to the executable through the stdin stream.\n")
+	os.Stderr.WriteString("[Error] Please include at least one argument or pipe search requests to the executable through the stdin stream.\n")
 	os.Stderr.WriteString(usage)
 	os.Exit(1)
 }
 
-// unicodeSearch decodes runs in command line requests to formatted Unicode code point values for stdout stream print
+func isIntInRange(value int32) bool {
+	minPrintableInt, _ := strconv.ParseInt("0020", 16, 32)
+
+	if value > utf8.MaxRune {
+		// value is higher than maximum acceptable Unicode code point
+		return false
+	}
+
+	if value < int32(minPrintableInt) {
+		// value is lower than minimum Unicode code point for printable glyphs
+		return false
+	}
+	// return true if integer value falls within acceptable range
+	return true
+}
+
+// glyphSearch identifies glyphs for Unicode code point (hexadecimal string) search requests
+func glyphSearch(arg string) (string, error) {
+	i, err := strconv.ParseInt(arg, 16, 32)
+	if err != nil {
+		return "", err
+	}
+	// test to confirm that Unicode code point falls in range U+0020 = min printable glyph to utf8.MaxRune value
+	ok := isIntInRange(int32(i))
+	if !ok {
+		errmsg := fmt.Errorf("Hexadecimal value '" + arg + "' was out of range.")
+		return "", errmsg
+	}
+	r := rune(i)
+	stdoutString := "U+" + arg + " '" + string(r) + "'"
+	return stdoutString, nil
+}
+
+// unicodeSearch identifies the Unicode code point for glyph search requests
 func unicodeSearch(argv []string) []string {
 	var solist []string
 	for i := 0; i < len(argv); i++ {
