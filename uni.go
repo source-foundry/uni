@@ -7,13 +7,11 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strconv"
 	"strings"
-	"unicode/utf8"
 )
 
 const (
-	version = "0.11.0"
+	version = "1.0.0"
 	usage   = "Usage: uni (options) [arg 1]...[arg n]\nLine Filter Usage: [application command] | uni (options)\n"
 	help    = "=================================================\n" +
 		" uni v" + version + "\n" +
@@ -73,9 +71,10 @@ func main() {
 	isStdinSearch := (!isGlyphSearch && len(os.Args) < 2) || (isGlyphSearch && len(os.Args) < 3)
 
 	if isStdinSearch {
-
 		if !stdinValidates(os.Stdin) {
-			handleStdInErrors()
+			os.Stderr.WriteString("[Error] Please include at least one argument or pipe search requests to the executable through the stdin stream.\n")
+			os.Stderr.WriteString(usage)
+			os.Exit(1)
 		}
 
 		tmp := new(bytes.Buffer)
@@ -123,80 +122,5 @@ func main() {
 				fmt.Println(stdoutString)
 			}
 		}
-
 	}
-
-}
-
-// test os.Stdin for presence of data, if present return true, else return false
-func stdinValidates(stdin *os.File) bool {
-	f, err := stdin.Stat()
-	if err != nil { // unable to obtain file data with Stat() method call = fail
-		return false
-	}
-
-	size := f.Size()
-	if size == 0 { // there does not appear to be any data in the stdin stream = fail
-		return false
-	}
-
-	return true
-}
-
-func handleStdInErrors() {
-	os.Stderr.WriteString("[Error] Please include at least one argument or pipe search requests to the executable through the stdin stream.\n")
-	os.Stderr.WriteString(usage)
-	os.Exit(1)
-}
-
-func isIntInRange(value int32) bool {
-	minPrintableInt, _ := strconv.ParseInt("0020", 16, 32)
-
-	if value > utf8.MaxRune {
-		// value is higher than maximum acceptable Unicode code point
-		return false
-	}
-
-	if value < int32(minPrintableInt) {
-		// value is lower than minimum Unicode code point for printable glyphs
-		return false
-	}
-	// return true if integer value falls within acceptable range
-	return true
-}
-
-// glyphSearch identifies glyphs for Unicode code point (hexadecimal string) search requests
-func glyphSearch(arg string) (string, error) {
-	i, err := strconv.ParseInt(arg, 16, 32)
-	if err != nil {
-		return "", err
-	}
-	// test to confirm that Unicode code point falls in range U+0020 = min printable glyph to utf8.MaxRune value
-	ok := isIntInRange(int32(i))
-	if !ok {
-		errmsg := fmt.Errorf("Hexadecimal value '" + arg + "' was out of range.")
-		return "", errmsg
-	}
-	r := rune(i)
-	stdoutString := "U+" + arg + " '" + string(r) + "'"
-	return stdoutString, nil
-}
-
-// unicodeSearch identifies the Unicode code point for glyph search requests
-func unicodeSearch(argv []string) []string {
-	var solist []string
-	for i := 0; i < len(argv); i++ {
-		if len(argv[i]) > 1 { // handle single argument that includes multiple glyphs
-			charList := strings.Split(argv[i], "")
-			for x := 0; x < len(charList); x++ {
-				r, _ := utf8.DecodeRuneInString(charList[x])
-				solist = append(solist, fmt.Sprintf("%#U", r))
-			}
-		} else { // handle multiple individual arguments
-			r, _ := utf8.DecodeRuneInString(argv[i])
-			solist = append(solist, fmt.Sprintf("%#U", r))
-		}
-
-	}
-	return solist
 }

@@ -3,68 +3,12 @@ package main
 import (
 	"bytes"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
 	"strings"
 	"testing"
 )
-
-// test single argument requests to unicodeSearch function for glyph --> Unicode code point search
-func TestUnicodeSearchCodePointsSingle(t *testing.T) {
-	cases := []struct {
-		glyph    string
-		expected string
-	}{
-		{"j", "U+006A 'j'"}, // ASCII
-		{"€", "U+20AC '€'"}, // Currency
-		{"β", "U+03B2 'β'"}, // Greek and Coptic
-		{"ф", "U+0444 'ф'"}, // Cyrillic
-		{"▀", "U+2580 '▀'"}, // Block elements
-	}
-
-	for _, c := range cases {
-		testglyph := []string{c.glyph}
-		response := unicodeSearch(testglyph)
-
-		if len(response) == 0 {
-			t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
-		} else if !strings.Contains(response[0], c.expected) {
-			t.Errorf("[FAIL] Glyph '%s' yielded response %s, not expected response %s", c.glyph, response[0], c.expected)
-		}
-	}
-}
-
-// test multiple argument requests to the unicodeSearch function for glyph --> Unicode code point search
-func TestUnicodeSearchCodePointsMultiple(t *testing.T) {
-	cases := []struct {
-		glyph    string
-		expected string
-	}{
-		{"j", "U+006A 'j'"}, // ASCII
-		{"€", "U+20AC '€'"}, // Currency
-		{"β", "U+03B2 'β'"}, // Greek and Coptic
-		{"ф", "U+0444 'ф'"}, // Cyrillic
-		{"▀", "U+2580 '▀'"}, // Block elements
-	}
-
-	var testglyphs []string
-
-	for _, c := range cases {
-		testglyphs = append(testglyphs, c.glyph)
-	}
-
-	response := unicodeSearch(testglyphs)
-
-	if len(response) == 0 {
-		t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
-	} else if !(len(response) == 5) {
-		t.Errorf("[FAIL] Expected five Unicode points in response.  Received %d", len(response))
-	} else if !strings.Contains(response[0], cases[0].expected) {
-		t.Errorf("[FAIL] Expected response %s for first index test but received response %s", cases[0].expected, response[0])
-	}
-}
 
 func TestMainFunction(t *testing.T) {
 	os.Args = []string{"uni", "j"}
@@ -95,32 +39,6 @@ func TestMainFunction(t *testing.T) {
 		t.Errorf("[FAIL] Test of main() function did not return standard output response")
 	} else if !strings.HasPrefix(out, "U+006A") {
 		t.Errorf("[FAIL] Expected execution of 'uni f' to return string that begins with 'U+006A', but instead it returned %s", out)
-	}
-
-}
-
-func TestStdinValidatesTrueFunction(t *testing.T) {
-	file, _ := ioutil.TempFile(os.TempDir(), "stdin")
-	defer os.Remove(file.Name())
-
-	file.WriteString("stdin test")
-
-	result := stdinValidates(file)
-	if result != true {
-		t.Errorf("[FAIL] Attempt to validate mocked stdin failed.")
-	}
-
-}
-
-func TestStdinValidatesFalseFunction(t *testing.T) {
-	file, _ := ioutil.TempFile(os.TempDir(), "stdin")
-	defer os.Remove(file.Name())
-
-	file.WriteString("")
-
-	result := stdinValidates(file)
-	if result != false {
-		t.Errorf("[FAIL] Attempt to validate empty mocked stdin failed.")
 	}
 
 }
