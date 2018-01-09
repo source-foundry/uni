@@ -11,8 +11,8 @@ import (
 	"testing"
 )
 
-// test single argument requests to unicodeSearch function
-func TestUnicodeCodePointsSingle(t *testing.T) {
+// test single argument requests to unicodeSearch function for glyph --> Unicode code point search
+func TestUnicodeSearchCodePointsSingle(t *testing.T) {
 	cases := []struct {
 		glyph    string
 		expected string
@@ -36,8 +36,8 @@ func TestUnicodeCodePointsSingle(t *testing.T) {
 	}
 }
 
-// test multiple argument requests to the unicodeSearch function
-func TestUnicodeCodePointsMultiple(t *testing.T) {
+// test multiple argument requests to the unicodeSearch function for glyph --> Unicode code point search
+func TestUnicodeSearchCodePointsMultiple(t *testing.T) {
 	cases := []struct {
 		glyph    string
 		expected string
