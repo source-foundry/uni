@@ -6,6 +6,48 @@ import (
 )
 
 // test single argument requests to unicodeSearch function for glyph --> Unicode code point search
+func TestGlyphSearchCodePointsSingle(t *testing.T) {
+	cases := []struct {
+		unihex    string
+		expected string
+	}{
+		{"006A", "U+006A 'j'"}, // ASCII
+		{"20AC", "U+20AC '€'"}, // Currency
+		{"03B2", "U+03B2 'β'"}, // Greek and Coptic
+		{"0444", "U+0444 'ф'"}, // Cyrillic
+		{"2580", "U+2580 '▀'"}, // Block elements
+	}
+
+	for _, c := range cases {
+		response, err := glyphSearch(c.unihex)
+
+		if err != nil {
+			t.Errorf("[FAIL] Expected no error on glyph search and received %v", err)
+		}
+
+		if len(response) == 0 {
+			t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
+		} else if !strings.Contains(response, c.expected) {
+			t.Errorf("[FAIL] Unicode code point '%s' yielded response %s, not expected response %s", c.unihex, response[0], c.expected)
+		}
+	}
+}
+
+func TestGlyphSearchInvalidHexadecimal(t *testing.T) {
+	response, err := glyphSearch("zzzzz")
+	if err == nil {
+		t.Errorf("[FAIL] Expected error with invalid hexadecimal format and instead received response %s", response)
+	}
+}
+
+func TestGlyphSearchInvalidOutOfRange(t *testing.T) {
+	response, err := glyphSearch("0010")
+	if err == nil {
+		t.Errorf("[FAIL] Expected error with out of range hexadecimal format and instead received response %s", response)
+	}
+}
+
+// test single argument requests to unicodeSearch function for glyph --> Unicode code point search
 func TestUnicodeSearchCodePointsSingle(t *testing.T) {
 	cases := []struct {
 		glyph    string
@@ -55,7 +97,11 @@ func TestUnicodeSearchCodePointsMultiple(t *testing.T) {
 		t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
 	} else if !(len(response) == 5) {
 		t.Errorf("[FAIL] Expected five Unicode points in response.  Received %d", len(response))
-	} else if !strings.Contains(response[0], cases[0].expected) {
-		t.Errorf("[FAIL] Expected response %s for first index test but received response %s", cases[0].expected, response[0])
+	}
+
+	for i := range response {
+		if !strings.Contains(response[i], cases[i].expected) {
+			t.Errorf("[FAIL] Expected response %s but received response %s", cases[i].expected, response[i])
+		}
 	}
 }
