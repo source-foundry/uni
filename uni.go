@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 	"strings"
+	"unicode"
 )
 
 const (
@@ -15,7 +16,6 @@ const (
 
 	usage = `Usage: uni (options) [arg 1]...[arg n]
 Line Filter Usage: [application command] | uni (options)
-
 `
 
 	help = `=================================================
@@ -37,7 +37,6 @@ Line Filter Usage: [application command] | uni (options)
   -h, --help           Application help
       --usage          Application usage
   -v, --version        Application version
-
 `
 )
 
@@ -62,13 +61,14 @@ func main() {
 	// parse command line flags and handle them
 	switch {
 	case *versionShort, *versionLong:
-		os.Stdout.WriteString("uni v" + version + "\n")
+		fmt.Printf("uni v%s\n", version)
+		fmt.Printf("Unicode Standard v%s\n", unicode.Version)
 		os.Exit(0)
 	case *helpShort, *helpLong:
-		os.Stdout.WriteString(help)
+		fmt.Println(help)
 		os.Exit(0)
 	case *usageLong:
-		os.Stdout.WriteString(usage)
+		fmt.Println(usage)
 		os.Exit(0)
 	}
 
