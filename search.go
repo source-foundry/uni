@@ -16,7 +16,7 @@ func glyphSearch(arg string) (string, error) {
 	// test to confirm that Unicode code point falls in range U+0020 = min printable glyph to utf8.MaxRune value
 	ok := isIntInRange(int32(i))
 	if !ok {
-		errmsg := fmt.Errorf("Hexadecimal value '" + arg + "' was out of range.")
+		errmsg := fmt.Errorf("hexadecimal value '%s' was out of range", arg)
 		return "", errmsg
 	}
 	r := rune(i)
