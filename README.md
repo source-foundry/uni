@@ -129,15 +129,17 @@ U+30CA 'ナ'
 
 Unicode code point searches are performed with the hexadecimal value.  Remove all prefix data from the string before you pass the request to uni. Include spaces between the Unicode code point arguments.
 
-**Acceptable Format**: `0041`
+**Acceptable hexadecimal format**: `0041`
 
-**Unacceptable Format**: `U+0041` `u+0041` `\u0041`
+**Unacceptable hexadecimal formats**: `U+0041` `u+0041` `\u0041`
 
 #### Unicode code points as arguments to `uni`
 
 ```
 $ uni [Unicode code point 1]...[Unicode code point n]
 ```
+
+##### Example
 
 ```
 $ uni -g 0041 0031 03B2 2580 30CA
@@ -153,6 +155,8 @@ U+30CA 'ナ'
 ```
 $ [application command] | uni -g
 ```
+
+##### Example
 
 ```
 $ echo -n "0041 0031 03B2 2580 30CA" | uni
