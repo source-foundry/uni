@@ -8,7 +8,7 @@ import (
 // test single argument requests to unicodeSearch function for glyph --> Unicode code point search
 func TestGlyphSearchCodePointsSingle(t *testing.T) {
 	cases := []struct {
-		unihex    string
+		unihex   string
 		expected string
 	}{
 		{"006A", "U+006A 'j'"}, // ASCII
