@@ -12,23 +12,33 @@ import (
 
 const (
 	version = "1.0.0"
-	usage   = "Usage: uni (options) [arg 1]...[arg n]\nLine Filter Usage: [application command] | uni (options)\n"
-	help    = "=================================================\n" +
-		" uni v" + version + "\n" +
-		" Copyright 2018 Christopher Simpkins\n" +
-		" MIT License\n\n" +
-		" Source: https://github.com/source-foundry/uni\n" +
-		"=================================================\n\n" +
-		" Usage:\n" +
-		"  - With command line arguments:\n" +
-		"        $ uni (options) [arg 1]...[arg n]\n" +
-		"  - As line filter:\n" +
-		"        $ [application command] | uni (options)\n\n" +
-		" Options:\n" +
-		" -g, --glyph          Search for glyph with Unicode code point\n" +
-		" -h, --help           Application help\n" +
-		"     --usage          Application usage\n" +
-		" -v, --version        Application version\n\n"
+
+	usage = `Usage: uni (options) [arg 1]...[arg n]
+Line Filter Usage: [application command] | uni (options)
+
+`
+
+	help = `=================================================
+ uni
+ Copyright 2018 Christopher Simpkins
+ MIT License
+
+ Source: https://github.com/source-foundry/uni
+=================================================
+ Usage:
+  - With command line arguments:
+      $ uni (options) [arg 1]...[arg n]
+  - As line filter:
+      $ [application command] | uni (options)
+ Default:
+   Search for Unicode code point(s) with glyph(s)
+ Options:
+  -g, --glyph          Search for glyph(s) with Unicode code point(s)
+  -h, --help           Application help
+      --usage          Application usage
+  -v, --version        Application version
+
+`
 )
 
 var versionShort, versionLong, helpShort, helpLong, usageLong, glyphShort, glyphLong *bool
