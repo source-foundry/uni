@@ -1,5 +1,11 @@
 ## Changelog
 
+### v1.0.0
+
+- added support for Unicode code point to glyph search
+- updated help and usage strings
+- added Unicode Standard version report to version string
+
 ### v0.10.1
 
 - fixed bug in goreleaser build script
