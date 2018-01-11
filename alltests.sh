@@ -3,4 +3,5 @@
 go build .
 ./uni --version
 pytest
+go test -v ./...
 
