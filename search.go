@@ -9,6 +9,10 @@ import (
 
 // glyphSearch identifies glyphs for Unicode code point (hexadecimal string) search requests
 func glyphSearch(arg string) (string, error) {
+	// strip newline value if this was included (e.g. with stdin stream piped text from another application)
+	if strings.Contains(arg, "\n") {
+		arg = strings.Replace(arg, "\n", "", -1)
+	}
 	i, err := strconv.ParseInt(arg, 16, 32)
 	if err != nil {
 		return "", err
