@@ -10,11 +10,19 @@
 
 <img src="https://raw.githubusercontent.com/source-foundry/uni/img/img/uni3-crunch.png" alt="uni Line Filter Example" width="99%"/>
 
-## Install
+## Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Issues](#issues)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
 
 uni is developed in Go and compiled to the command line executable `uni` (`uni.exe` on Windows).  A variety of cross-compiled binaries are available for use on Linux, macOS, and Windows systems, or you can download the source and compile the application yourself.  Instructions for both approaches follow.
 
-## Installation
+## Installation Approaches
 
 ### Approach 1: Install the pre-compiled binary executable file
 
@@ -177,4 +185,4 @@ Contributions to the project are encouraged and welcomed. Please base your work 
 
 ## License
 
-[MIT License](https://github.com/source-foundry/uni/blob/master/LICENSE)
+uni is licensed under the [MIT License](https://github.com/source-foundry/uni/blob/master/LICENSE).
