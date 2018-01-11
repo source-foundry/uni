@@ -28,7 +28,7 @@ func TestGlyphSearchCodePointsSingle(t *testing.T) {
 		if len(response) == 0 {
 			t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
 		} else if !strings.Contains(response, c.expected) {
-			t.Errorf("[FAIL] Unicode code point '%s' yielded response %s, not expected response %s", c.unihex, response[0], c.expected)
+			t.Errorf("[FAIL] Unicode code point '%s' yielded response %v, not expected response %s", c.unihex, response[0], c.expected)
 		}
 	}
 }
@@ -58,7 +58,7 @@ func TestGlyphSearchCodePointsSingleWithNewline(t *testing.T) {
 		if len(response) == 0 {
 			t.Errorf("[FAIL] unicodeSearch did not return a value (len = 0)")
 		} else if !strings.Contains(response, c.expected) {
-			t.Errorf("[FAIL] Unicode code point '%s' yielded response %s, not expected response %s", c.unihex, response[0], c.expected)
+			t.Errorf("[FAIL] Unicode code point '%s' yielded response %v, not expected response %s", c.unihex, response[0], c.expected)
 		}
 	}
 }
