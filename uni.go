@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	version = "1.0.0"
+	version = "2.0.0"
 
 	usage = `Usage: uni (options) [arg 1]...[arg n]
 Line Filter Usage: [application command] | uni (options)
@@ -20,6 +20,7 @@ Line Filter Usage: [application command] | uni (options)
 
 	help = `=================================================
  uni
+ Unicode v10.0 search tool
  Copyright 2018 Christopher Simpkins
  MIT License
 
@@ -41,6 +42,7 @@ Line Filter Usage: [application command] | uni (options)
 )
 
 var versionShort, versionLong, helpShort, helpLong, usageLong, glyphShort, glyphLong *bool
+//var listShort, listLong, listCommas, listNewLine *bool
 var isGlyphSearch = false
 
 func init() {
@@ -52,6 +54,10 @@ func init() {
 	usageLong = flag.Bool("usage", false, "Usage")
 	glyphShort = flag.Bool("g", false, "Glyph")
 	glyphLong = flag.Bool("glyph", false, "Glyph")
+	//listShort = flag.Bool("l", false, "List")
+	//listLong = flag.Bool("list", false, "List")
+	//listCommas = flag.Bool("comma", false, "Comma delimiters in lists")
+	//listNewLine = flag.Bool("newline", false, "Newline delimiters in lists")
 }
 
 func main() {
@@ -71,6 +77,42 @@ func main() {
 		fmt.Println(usage)
 		os.Exit(0)
 	}
+
+	//if *listShort || *listLong {
+	//	if len(os.Args) < 3 {
+	//		os.Stderr.WriteString("[Error] Please include at least one Unicode code point range argument for the list.\n")
+	//		os.Exit(1)
+	//	}
+	//	var finalUniList []string
+	//	for _, x := range flag.Args() {
+	//		if strings.Contains(x, "-") {
+	//			tempUniList := strings.Split(x, "-")
+	//			startInt, startErr := strconv.ParseInt(tempUniList[0], 16, 32)
+	//			endInt, endErr := strconv.ParseInt(tempUniList[1], 16, 32)
+	//			if startErr != nil {
+	//				// TODO
+	//			}
+	//			if endErr != nil {
+	//				// TODO
+	//			}
+	//			for i := startInt; i <= endInt; i++ {
+	//				finalUniList = append(finalUniList, fmt.Sprintf("%U", i))
+	//
+	//			}
+	//		}
+	//	}
+	//
+	//	if *listCommas {
+	//		fmt.Print(strings.Join(finalUniList, ","))
+	//	} else if *listNewLine {
+	//		fmt.Print(strings.Join(finalUniList, "\n"))
+	//	} else {
+	//		fmt.Print(strings.Join(finalUniList, " "))
+	//	}
+	//
+	//	// TODO: need to exit to prevent code below from executing
+	//	os.Exit(0)
+	//}
 
 	// create a flag for Unicode code point to glyph search command line requests
 	if *glyphShort || *glyphLong {
