@@ -46,7 +46,7 @@ There are no dependencies contained in the archive.  You can delete all download
 
 ### Approach 2: Compile from the source code and install
 
-You must install the Go programming language (which includes the `go` tool) in order to compile the project from source.  Follow the [instructions on the Go download page](https://golang.org/dl/) for your platform. 
+You must install the Go programming language (which includes the `go` tool) in order to compile the project from source.  Install Go v1.10 or above for Unicode v10.0.0 support.  Follow the [instructions on the Go download page](https://golang.org/dl/) for your platform. 
 
 Once you have installed Go and configured your settings so that Go executables are installed on your system PATH, use the following command to (1) pull the master branch of the uni repository; (2) compile the `uni` executable from source for your platform/architecture configuration; (3) install the executable on your system:
 
