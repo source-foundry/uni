@@ -42,6 +42,7 @@ Line Filter Usage: [application command] | uni (options)
 )
 
 var versionShort, versionLong, helpShort, helpLong, usageLong, glyphShort, glyphLong *bool
+
 //var listShort, listLong, listCommas, listNewLine *bool
 var isGlyphSearch = false
 
