@@ -1,5 +1,9 @@
 ## Changelog
 
+### v2.0.0
+
+- updated Unicode support to v10.0.  Adds 8,518 new Unicode code points.
+
 ### v1.0.0
 
 - added support for Unicode code point to glyph search
