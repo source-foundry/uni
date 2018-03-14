@@ -4,7 +4,7 @@
 
 ## About
 
-`uni` is a command line application that performs glyph based searches for Unicode v9.0.0 defined code points and Unicode code point based searches for glyphs.
+`uni` is a command line application that performs glyph based searches for Unicode v10.0.0 defined code points and Unicode code point based searches for glyph shapes.
 
 <img src="https://raw.githubusercontent.com/source-foundry/uni/img/img/uni1-crunch.png" alt="uni Argument Example" width="99%"/>
 
