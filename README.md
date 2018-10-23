@@ -1,7 +1,9 @@
 # uni
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/911fcbf70f7f4312b895b0c3dce67d8c)](https://app.codacy.com/app/SourceFoundry/uni?utm_source=github.com&utm_medium=referral&utm_content=source-foundry/uni&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://semaphoreci.com/api/v1/sourcefoundry/uni/branches/master/badge.svg)](https://semaphoreci.com/sourcefoundry/uni) [![Build status](https://ci.appveyor.com/api/projects/status/1cbesa0qnbqgoj0p/branch/master?svg=true)](https://ci.appveyor.com/project/chrissimpkins/uni/branch/master) [![Go Report Card](https://goreportcard.com/badge/github.com/source-foundry/uni)](https://goreportcard.com/report/github.com/source-foundry/uni)
+[![Build Status](https://semaphoreci.com/api/v1/sourcefoundry/uni/branches/master/badge.svg)](https://semaphoreci.com/sourcefoundry/uni) 
+[![Build status](https://ci.appveyor.com/api/projects/status/1cbesa0qnbqgoj0p/branch/master?svg=true)](https://ci.appveyor.com/project/chrissimpkins/uni/branch/master) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/source-foundry/uni)](https://goreportcard.com/report/github.com/source-foundry/uni) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/911fcbf70f7f4312b895b0c3dce67d8c)](https://app.codacy.com/app/SourceFoundry/uni)
 
 ## About
 
